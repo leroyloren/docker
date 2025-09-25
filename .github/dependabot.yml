@@ -1,0 +1,25 @@
+# Základní konfigurace pro Dependabot
+
+version: 2
+updates:
+  # Konfigurace pro npm (např. package.json)
+  - package-ecosystem: "npm"
+    directory: "/" # Kořenový adresář, kde je package.json
+    schedule:
+      interval: "daily" # Kontrolovat denně
+    commit-message:
+      # Vlastní formát commit zprávy
+      prefix: "deps"
+      include: "scope"
+    # Seskupení menších aktualizací do jednoho PR
+    groups:
+      patch-and-minor:
+        update-types:
+        - "minor"
+        - "patch"
+
+  # Konfigurace pro GitHub Actions (workflow soubory)
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly" # Kontrolovat týdně
